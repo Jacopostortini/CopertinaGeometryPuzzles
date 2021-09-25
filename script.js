@@ -71,10 +71,14 @@ window.onload = () => {
                 angle += angleIncrement;
                 const centerX = CENTER.x + radius * Math.cos(angle);
                 const centerY = CENTER.y + radius * Math.sin(angle);
-                
+                //approssimo l'arco di circonferenza che passa per i vertici del quadrato alla diagonale stessa del quadrato
                 drawSquare(Math.PI * 2 * radius / vertexes, centerX, centerY, -angle);
             }
-            radius = radius * vertexes / (vertexes - Math.PI);
+
+            //Il nuovo raggio r deve essere relativo al vecchio raggio r0 secondo 2(r-r0) = r*2*PI/vertici 
+            // -0.2 serve per regolare leggermente il raggio calcolato che per colpa delle approssimazioni usate
+            //risulta impreciso
+            radius = radius * vertexes / (vertexes - Math.PI - 0.2);
         }
         
         requestAnimationFrame(draw);
